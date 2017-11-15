@@ -1,5 +1,6 @@
 package com.xilongmei.chapter2.service;
 
+import com.xilongmei.chapter2.helper.DatabaseHelper;
 import com.xilongmei.chapter2.model.Customer;
 import com.xilongmei.chapter2.util.PropsUtil;
 import org.slf4j.Logger;
@@ -15,10 +16,9 @@ import java.util.Properties;
 public class CustomerService {
 
 
-
     public List<Customer> getCustomerList(String keyword) {
-
-        return null;
+        String sql = "SELECT * FROM customer";
+        return DatabaseHelper.queryEntityList(Customer.class, sql);
     }
 
     public Customer getCustomer(long id) {
