@@ -2,6 +2,7 @@ package com.xilongmei.chapter2.helper;
 
 import com.xilongmei.chapter2.service.CustomerService;
 import com.xilongmei.chapter2.util.PropsUtil;
+import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +17,7 @@ public final class DatabaseHelper {
     private static final String URL;
     private static final String USERNAME;
     private static final String PASSWORD;
+    private static final QueryRunner QUERY_RUNNER=new QueryRunner();
 
     static {
         Properties conf = PropsUtil.LoadProps("config.properties");
