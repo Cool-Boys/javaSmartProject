@@ -2,11 +2,13 @@ package com.xilongmei.chapter2.helper;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.xilongmei.chapter2.service.CustomerService;
+import com.xilongmei.chapter2.util.CollectionUtil;
 import com.xilongmei.chapter2.util.PropsUtil;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,14 +131,26 @@ public final class DatabaseHelper {
         } catch (SQLException e) {
             LOGGER.error("execute query failure", e);
             throw new RuntimeException(e);
-        }
-        finally {
+        } finally {
             closeConnection();
         }
         return result;
     }
 
 
+    public  static <T> boolean insertEntity(Class<T> entityClass, Map<String,Object> feildMap){
+        if(CollectionUtil.isEmpty(feildMap)){
+           LOGGER.error("can not insert entity: fieldMap is empty");
+           return false;
+        }
+        String sql="INSERT INTO "+getTableName(entityClass)+"";
+
+
+    }
+
+    private static  String getTableName(Class<?> entityClass) {
+        return entityClass.getSimpleName();
+    }
 
 
 }
